@@ -6,4 +6,4 @@ ultralytics
 aiohttp
 tqdm
 pandas
-openpyxl
+xlsxwriter
