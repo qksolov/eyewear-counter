@@ -1,0 +1,4 @@
+gradio
+torch
+pandas
+nest_asyncio
