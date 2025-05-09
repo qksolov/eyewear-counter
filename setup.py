@@ -8,7 +8,7 @@ setup(
         "torch",
         "torchvision",
         "opencv-python-headless",
-        "ultralytics"
+        "ultralytics",
         "numpy",
         "aiohttp",
         "tqdm",
