@@ -27,7 +27,7 @@ setup(
         ],
     },
         package_data={
-        'eyewear_counter': ['weights/*', 'assets/*'], 
+        '': ['weights/*', 'assets/*'], 
     },
     author="Ekaterina Solovyeva",
     description="Fast model for counting eyewear types in large sets of images.",
