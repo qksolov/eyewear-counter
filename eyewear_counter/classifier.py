@@ -20,11 +20,13 @@ def build_mobilenet_classifier(num_classes=3):
 MODEL_CONFIGS = {
     'resnet18': {
         'builder': build_resnet18_classifier,
-        'weights': 'resnet18_glasses.pt'
+        'weights': 'resnet18_glasses.pt',
+        'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/resnet18_glasses.pt'
     },
     'mobilenet_v3_small': {
         'builder': build_mobilenet_classifier,
-        'weights': 'mobilenet_v3_large_glasses.pt'
+        'weights': 'mobilenet_v3_large_glasses.pt',
+        'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/mobilenet_v3_large_glasses.pt'
     }
 }
 
@@ -58,11 +60,10 @@ class EyewearClassifier:
         
         if weights_path is None:
             weights_path = Path(__file__).parent.parent / "weights" / config['weights']
+            if not weights_path.is_file():
+                weights_path = config['weights_url']
         else:
             weights_path = Path(weights_path)
-
-        if not weights_path.is_file():
-            raise FileNotFoundError(f"Файл весов модели не найден: {weights_path}")
 
         try:
             self.model = config['builder'](num_classes=3)
