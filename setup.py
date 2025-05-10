@@ -26,6 +26,9 @@ setup(
             "eyewear-counter-app=app.app:main",
         ],
     },
+        package_data={
+        'eyewear_counter': ['weights/*', 'assets/*'], 
+    },
     author="Ekaterina Solovyeva",
     description="Fast model for counting eyewear types in large sets of images.",
     python_requires=">=3.8",
