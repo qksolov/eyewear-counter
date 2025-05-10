@@ -60,11 +60,12 @@ class EyewearClassifier:
 
         try:
             if weights_path is None:
-                weights_path = Path(__file__).parent.parent / "weights" / config['weights']
-                model_state_dict = torch.load(weights_path, map_location=device)
+                weights_path = Path(__file__).parent.parent / "weights" / config['weights']                
                 if not weights_path.is_file():
                     weights_url = config['weights_url']
                     model_state_dict = torch.hub.load_state_dict_from_url(weights_url, map_location=device)
+                else:
+                    model_state_dict = torch.load(weights_path, map_location=device)
             else:
                 weights_path = Path(weights_path)
                 model_state_dict = torch.load(weights_path, map_location=device)
