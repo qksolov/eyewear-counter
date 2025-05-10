@@ -2,6 +2,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 from pathlib import Path
+from .utils import load_pt_from_url
 
 
 class YoloDetector:
@@ -28,17 +29,18 @@ class YoloDetector:
         
         if model_path is None:
             model_path = Path(__file__).parent.parent / "weights" / "yolov11n-face.pt"
+            if not model_path.is_file():
+                model_url = "https://github.com/qksolov/eyewear-counter/raw/main/weights/yolov11n-face.pt"
+                model_path = load_pt_from_url(model_url)
         else:
             model_path = Path(model_path)
-        if not model_path.is_file():
-            raise FileNotFoundError(f"Файл модели не найден: {model_path}")
         
         try:
             self.model = YOLO(model_path)
             self.model.to(device)
             self.model.eval()
         except Exception as e:
-            raise RuntimeError(f"Не удалось загрузить модель из {model_path}: {e}")
+            raise RuntimeError(f"Не удалось загрузить модель YOLO из {model_path}: {e}")
         
         self.threshold = threshold
         self.max_faces = max_faces

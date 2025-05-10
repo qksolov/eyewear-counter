@@ -20,11 +20,13 @@ def build_mobilenet_classifier(num_classes=3):
 MODEL_CONFIGS = {
     'resnet18': {
         'builder': build_resnet18_classifier,
-        'weights': 'resnet18_glasses.pt'
+        'weights': 'resnet18_glasses.pt',
+        'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/resnet18_glasses.pt'
     },
     'mobilenet_v3_small': {
         'builder': build_mobilenet_classifier,
-        'weights': 'mobilenet_v3_large_glasses.pt'
+        'weights': 'mobilenet_v3_large_glasses.pt',
+        'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/mobilenet_v3_large_glasses.pt'
     }
 }
 
@@ -55,18 +57,21 @@ class EyewearClassifier:
             )
         
         config = MODEL_CONFIGS[model_type]
-        
-        if weights_path is None:
-            weights_path = Path(__file__).parent.parent / "weights" / config['weights']
-        else:
-            weights_path = Path(weights_path)
-
-        if not weights_path.is_file():
-            raise FileNotFoundError(f"Файл весов модели не найден: {weights_path}")
 
         try:
+            if weights_path is None:
+                weights_path = Path(__file__).parent.parent / "weights" / config['weights']                
+                if not weights_path.is_file():
+                    weights_url = config['weights_url']
+                    model_state_dict = torch.hub.load_state_dict_from_url(weights_url, map_location=device)
+                else:
+                    model_state_dict = torch.load(weights_path, map_location=device)
+            else:
+                weights_path = Path(weights_path)
+                model_state_dict = torch.load(weights_path, map_location=device)
+        
             self.model = config['builder'](num_classes=3)
-            self.model.load_state_dict(torch.load(weights_path, map_location=device))
+            self.model.load_state_dict(model_state_dict)
             self.model.to(device)
             self.model.eval()
         except Exception as e:

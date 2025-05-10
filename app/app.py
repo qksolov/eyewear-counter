@@ -5,15 +5,12 @@ import tempfile
 import os
 import pandas as pd
 import torch
-import nest_asyncio
 
-
-nest_asyncio.apply()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = EyewearCounter(device=device)
 
-example_file_path = os.path.join('assets', 'example_data.csv')
+example_file_path = "https://github.com/qksolov/eyewear-counter/raw/main/assets/example_data.csv"
 example_df = pd.read_csv(example_file_path, encoding='cp1251', sep=';')
 _, summary_df_dummy, plot_df_dummy = generate_report([], 0)
 summary_df_dummy.replace(0, "", inplace=True)
