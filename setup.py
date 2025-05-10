@@ -7,17 +7,29 @@ setup(
     install_requires=[
         "torch",
         "torchvision",
-        "opencv-python-headless",
+        "opencv-python",
         "ultralytics",
         "numpy",
+        "pandas",
         "aiohttp",
         "tqdm",
-        "pandas",
-        "gradio",         
-        "nest_asyncio",
         "xlsxwriter"
     ],
-    author="qksolov",
-    description="Eyewear counter project with face detection and eyewear classification",
+    extras_require={
+        "app": [
+            "gradio",
+            "nest_asyncio",
+        ],
+    },
+    entry_points={
+        "console_scripts": [
+            "eyewear-counter-app=app.app:main",
+        ],
+    },
+        package_data={
+        '': ['weights/*', 'assets/*'], 
+    },
+    author="Ekaterina Solovyeva",
+    description="Fast model for counting eyewear types in large sets of images.",
     python_requires=">=3.8",
 )

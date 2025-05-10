@@ -348,4 +348,8 @@ with gr.Blocks(css=css, theme=gr.themes.Base()) as demo:
     )
 
 
-demo.launch(share=True)
+def main():
+    demo.launch(share=True)
+
+if __name__ == "__main__":
+    main()
