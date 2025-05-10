@@ -13,8 +13,7 @@ setup(
         "pandas",
         "aiohttp",
         "tqdm",
-        "xlsxwriter",
-        "requests",
+        "xlsxwriter"
     ],
     extras_require={
         "app": [

@@ -7,4 +7,3 @@ aiohttp
 tqdm
 pandas
 xlsxwriter
-requests

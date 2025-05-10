@@ -2,8 +2,6 @@ import torch
 import torch.nn.functional as F
 from torchvision import models
 from pathlib import Path
-import requests
-from io import BytesIO
 
 
 def build_resnet18_classifier(num_classes=3):
@@ -63,9 +61,7 @@ class EyewearClassifier:
         if weights_path is None:
             weights_path = Path(__file__).parent.parent / "weights" / config['weights']
             if not weights_path.is_file():
-                response = requests.get(config['weights_url'])
-                response.raise_for_status()
-                weights_path = BytesIO(response.content)
+                weights_path = config['weights_url']
         else:
             weights_path = Path(weights_path)
 
