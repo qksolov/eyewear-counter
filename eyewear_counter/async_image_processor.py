@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 import cv2
 from .utils import DummyProgressBar
+import nest_asyncio
 
 
 class AsyncImageProcessor:
@@ -140,6 +141,8 @@ class AsyncImageProcessor:
 
     
     def run(self, image_urls, pbar=None):
+        nest_asyncio.apply()
+        
         self.errors_cnt = 0
         if image_urls[0].startswith("http"):
             self.from_disk=False

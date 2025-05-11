@@ -5,10 +5,7 @@ import tempfile
 import os
 import pandas as pd
 import torch
-import nest_asyncio
 
-
-nest_asyncio.apply()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = EyewearCounter(device=device)
