@@ -24,6 +24,15 @@ setup(
         ],
     },
     author="Ekaterina Solovyeva",
+    author_email="qksolov@gmail.com",
     description="Fast model for counting eyewear types in large sets of images.",
+    long_description=open("README.md", encoding="utf-8").read(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/qksolov/eyewear-counter",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
     python_requires=">=3.8",
 )
