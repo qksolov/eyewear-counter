@@ -15,6 +15,7 @@ setup(
         "tqdm",
         "xlsxwriter",
         "nest_asyncio",
+        "requests",
         "gradio",
     ],
     entry_points={
