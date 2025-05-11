@@ -6,21 +6,17 @@ setup(
     packages=find_packages(),
     install_requires=[
         "torch",
-        "torchvision",
-        "opencv-python",
+        "torchvision",        
         "ultralytics",
+        "opencv-python",
         "numpy",
         "pandas",
         "aiohttp",
         "tqdm",
-        "xlsxwriter"
+        "xlsxwriter",
+        "nest_asyncio",
+        "gradio",
     ],
-    extras_require={
-        "app": [
-            "gradio",
-            "nest_asyncio",
-        ],
-    },
     entry_points={
         "console_scripts": [
             "eyewear-counter-app=app.app:main",
