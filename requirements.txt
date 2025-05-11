@@ -8,3 +8,4 @@ tqdm
 pandas
 xlsxwriter
 nest_asyncio
+requests

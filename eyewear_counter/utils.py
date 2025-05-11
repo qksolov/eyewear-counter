@@ -1,3 +1,8 @@
+from tqdm import tqdm
+import tempfile
+import requests
+
+
 class DummyProgressBar:
     """
         Заглушка для прогресс-бара с интерфейсом, совместимым с tqdm.
@@ -31,3 +36,23 @@ class DummyProgressBar:
         pass
 
 
+def load_pt_from_url(url):
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+    
+    total_size = int(response.headers.get('content-length', 0))
+    print(f'Downloading: "{url}"')
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".pt") as tmp:
+        with tqdm(
+            total=total_size, 
+            unit='B', 
+            unit_scale=True            
+        ) as pbar:
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk: 
+                    tmp.write(chunk)
+                    pbar.update(len(chunk))
+        
+        tmp_path = tmp.name
+
+    return tmp_path
