@@ -117,7 +117,7 @@ def run_model(
         ):
     image_urls = list(df[url_column])
     try:
-        predictions_tensor, errors_cnt = model.find(
+        predictions_tensor, errors_cnt = model.run(
             image_urls,
             image_size=image_size, image_fit=image_fit,
             max_faces=max_faces, threshold=threshold,
