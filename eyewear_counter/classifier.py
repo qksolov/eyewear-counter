@@ -23,7 +23,7 @@ MODEL_CONFIGS = {
         'weights': 'resnet18_glasses.pt',
         'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/resnet18_glasses.pt'
     },
-    'mobilenet_v3_small': {
+    'mobilenet_v3_large': {
         'builder': build_mobilenet_classifier,
         'weights': 'mobilenet_v3_large_glasses.pt',
         'weights_url': 'https://github.com/qksolov/eyewear-counter/raw/main/weights/mobilenet_v3_large_glasses.pt'
