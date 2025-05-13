@@ -87,7 +87,7 @@ class EyewearCounter:
                                 self.samples[k] = image
 
 
-    def find(self, sources,
+    def run(self, sources,
              image_size=800, image_fit=True,batch_size=32, max_workers=3,
              max_faces=4, threshold=0.7,
              save_samples=False,
