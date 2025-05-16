@@ -162,7 +162,7 @@ class RetinaFaceDetector:
             all_faces = self.model(images_np, threshold=self.threshold, resize=1, max_size=-1)
             num_images = images_np.shape[0]
             
-            rois = np.empty((num_images * self.max_faces, 5), dtype=np.float32, )
+            rois = np.empty((num_images * self.max_faces, 5), dtype=np.float32)
 
             index = 0
             for i, faces in enumerate(all_faces):
@@ -170,5 +170,5 @@ class RetinaFaceDetector:
                     rois[index, 1:] = face[0]
                     rois[index, 0] = i
                     index += 1
-            rois_tensor = torch.tensor(rois[:index], device=self.device)
+            rois_tensor = torch.from_numpy(rois[:index]).to(self.device)
         return rois_tensor

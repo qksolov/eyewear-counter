@@ -251,7 +251,7 @@ with gr.Blocks(css=css, theme=gr.themes.Base()) as demo:
                         show_reset_button=False,
                     )
                     batch_size = gr.Slider(
-                        value=20 if device == 'cuda' else 4, minimum=1, maximum=100, step=1,
+                        value=40 if device == 'cuda' else 4, minimum=1, maximum=100, step=1,
                         label="Размер батча",
                         show_reset_button=False,
                     )

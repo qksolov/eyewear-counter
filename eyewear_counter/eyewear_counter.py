@@ -88,7 +88,7 @@ class EyewearCounter:
 
 
     def run(self, sources,
-             image_size=800, image_fit=True,batch_size=32, max_workers=3,
+             image_size=640, image_fit=True, batch_size=32, max_workers=3,
              max_faces=4, threshold=0.7,
              save_samples=False,
              progress_bar=tqdm):
@@ -97,7 +97,7 @@ class EyewearCounter:
 
         Args:
             sources (Sequence[str]): Список URL или путей к изображениям.
-            image_size (int, optional): Размер для ресайза изображений. Default: 800.
+            image_size (int, optional): Размер для ресайза изображений. Default: 640.
             image_fit (bool, optional): Сохранять пропорции с padding. Default: True.
             batch_size (int, optional): Размер батча. Default: 32.
             max_workers (int, optional): Количество worker'ов. Default: 3.
