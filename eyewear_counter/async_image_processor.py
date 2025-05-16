@@ -150,7 +150,7 @@ class AsyncImageProcessor:
             self.from_disk=True
         
         if pbar is None:
-            pbar = DummyProgressBar()
+            pbar = DummyProgressBar
         self.pbar = pbar(total=len(image_urls), desc="Обработка",
                          ncols=100, dynamic_ncols=True, position=0)
 
