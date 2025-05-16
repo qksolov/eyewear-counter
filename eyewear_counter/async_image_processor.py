@@ -36,13 +36,14 @@ class AsyncImageProcessor:
         if self.image_fit:
             h, w, _ = image.shape # (H, W, 3) BGR
             if h != w:
-                pad1, pad2 = divmod(abs(h - w), 2)
+                pad1 = abs(h - w) // 2
+                pad2 = abs(h - w) - pad1
                 if h < w:
                     image = cv2.copyMakeBorder(image, pad1, pad2, 0, 0, cv2.BORDER_CONSTANT, value=(0, 0, 0))
                 else:
                     image = cv2.copyMakeBorder(image, 0, 0, pad1, pad2, cv2.BORDER_CONSTANT, value=(0, 0, 0))
         
-        padding = int(0.1 * max(image.shape[:2]))
+        padding = int(0.05 * max(image.shape[:2]))
         image = cv2.copyMakeBorder(image, padding, padding, padding, padding, cv2.BORDER_CONSTANT, value=(0, 0, 0))
         
         image = cv2.resize(cv2.UMat(image), (self.image_size, self.image_size)).get()
@@ -150,7 +151,7 @@ class AsyncImageProcessor:
             self.from_disk=True
         
         if pbar is None:
-            pbar = DummyProgressBar()
+            pbar = DummyProgressBar
         self.pbar = pbar(total=len(image_urls), desc="Обработка",
                          ncols=100, dynamic_ncols=True, position=0)
 
