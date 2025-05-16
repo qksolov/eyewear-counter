@@ -10,7 +10,6 @@ __all__ = [
     "generate_report",
     "EyewearClassifier",
     "YoloDetector",
-    "RetinaFaceDetector1",
     "RetinaFaceDetector",
     "DummyProgressBar",
 ]
