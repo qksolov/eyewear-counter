@@ -15,7 +15,7 @@
 
 ```mermaid
 flowchart TB
-    subgraph "EyewearCounter Batch Process"
+    subgraph "Model Batch Process"
         direction LR
         InputBatch[(Image Batch)] --> FaceDetector
         FaceDetector["Face Detector"] -->|"bboxes"| ROIOperation
@@ -29,7 +29,7 @@ flowchart TB
 
 - **Consumers**: Собирают батчи изображений из общей асинхронной очереди и передают их в модель.
 
-- **Параллельная обработка**: модель работает в пуле потоков.
+- **Параллельная обработка**: Каждый батч обрабатывается в отдельном потоке ThreadPoolExecutor. Это предусмотрено для CPU-режима, где даёт истинное распараллеливание. При работе с GPU дает небольшое ускорение за счёт конвейеризации (перекрытие загрузки данных и вычислений), несмотря на последовательное исполнение ядер GPU.
 
 
 ```mermaid
