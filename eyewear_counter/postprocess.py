@@ -2,6 +2,26 @@ import pandas as pd
 
 
 def generate_report(predictions, errors_cnt, df_input=None, filename=None):
+    """
+    Генерирует итоговый отчёт на основе предсказаний модели и количества ошибок.
+
+    Args:
+        predictions (torch.Tensor or np.ndarray or list): Список предсказаний модели. 
+            Ожидается массив shape=(N, 3), где каждый столбец соответствует 
+            вероятности классов: ['В очках', 'Без очков', 'В солнцезащитных очках'].
+        errors_cnt (int): Количество изображений, которые не удалось обработать.
+        df_input (pd.DataFrame, optional): Входная таблица с метаинформацией.
+            !!! Важно: порядок строк в df_input должен точно соответствовать порядку входных изображений, 
+            для которых были получены predictions. Несоответствие может привести к некорректному отображению результатов.
+        filename (str, optional): Если указан, результат сохраняется в Excel-файл с несколькими листами.
+
+    Returns:
+        tuple:
+            - result_df (pd.DataFrame or None): Таблица с предсказаниями по строкам df_input.
+            - summary_df (pd.DataFrame): Сводная таблица с общей статистикой.
+            - class_isolation_stats_df (pd.DataFrame): Статистика по классам.
+    """
+
     predictions_df = pd.DataFrame(predictions, columns=['В очках', 'Без очков', 'В солнцезащитных очках'])
     summary_df, class_isolation_stats_df = generate_summary(predictions_df, errors_cnt) 
     if df_input is None:

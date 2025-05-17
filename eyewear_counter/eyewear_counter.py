@@ -12,11 +12,6 @@ class EyewearCounter:
     """
     Класс для поиска лиц на изображениях и классификации наличия очков/солнцезащитных очков.
     
-    Атрибуты:
-        detector (BaseFaceDetector): детектор лиц, реализующий метод detect.
-        classifier (BaseClassifier): классификатор лиц, реализующий метод predict.
-        device (torch.device): устройство, на котором выполняются все тензорные вычисления.
-    
     Attributes:
         detector (BaseFaceDetector): Детектор лиц, реализующий метод detect.
         classifier (BaseClassifier): Классификатор очков, реализующий метод predict.
@@ -40,7 +35,7 @@ class EyewearCounter:
             classifier = EyewearClassifier(model_type="resnet18", device=device)
         self.classifier = classifier
 
-        self.results = []
+        self.results = torch.tensor([])
 
         self.save_samples = False
         self.samples = {}
