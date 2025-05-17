@@ -45,7 +45,15 @@ class EyewearClassifier:
                  model_type="resnet18", 
                  weights_path=None, 
                  device=None):
-        
+        """
+        Args:
+            model_type (str): Название архитектуры модели. 
+                            Поддерживаются: "resnet18", "mobilenet_v3_large".
+            weights_path (str or Path, optional): Путь к файлу с весами модели. 
+            device (torch.device, optional): Устройство для вычислений 
+                            ("cuda" или "cpu"). Если не указано, выбирается автоматически.
+        """
+         
         if device is None:
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.device = device
